@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04AA7A6B26E31C89005A6810 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AA7A6A26E31C89005A6810 /* NotificationCenter.framework */; };
+		04AA7A6E26E31C89005A6810 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AA7A6D26E31C89005A6810 /* TodayViewController.swift */; };
+		04AA7A7126E31C89005A6810 /* TodayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AA7A6F26E31C89005A6810 /* TodayViewController.xib */; };
+		04AA7A7526E31C89005A6810 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04AA7A7326E31C89005A6810 /* InfoPlist.strings */; };
+		04AA7A7926E31C89005A6810 /* MinesweeperProductName.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 04AA7A6826E31C89005A6810 /* MinesweeperProductName.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		04DF1212257072A60093A96C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF1211257072A60093A96C /* AppDelegate.swift */; };
 		04DF1214257072A60093A96C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF1213257072A60093A96C /* ViewController.swift */; };
 		04DF1216257072A90093A96C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04DF1215257072A80093A96C /* Assets.xcassets */; };
@@ -16,6 +21,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		04AA7A7726E31C89005A6810 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04DF1206257072A60093A96C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 04AA7A6726E31C89005A6810;
+			remoteInfo = MinesweeperWidget;
+		};
 		04DF1221257072A90093A96C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 04DF1206257072A60093A96C /* Project object */;
@@ -32,7 +44,28 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		04AA7A7D26E31C89005A6810 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				04AA7A7926E31C89005A6810 /* MinesweeperProductName.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		04AA7A6826E31C89005A6810 /* MinesweeperProductName.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MinesweeperProductName.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		04AA7A6A26E31C89005A6810 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		04AA7A6D26E31C89005A6810 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		04AA7A7026E31C89005A6810 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/TodayViewController.xib; sourceTree = "<group>"; };
+		04AA7A7226E31C89005A6810 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04AA7A7426E31C89005A6810 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		04AA7A7626E31C89005A6810 /* MinesweeperWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MinesweeperWidget.entitlements; sourceTree = "<group>"; };
 		04DF120E257072A60093A96C /* Minesweeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Minesweeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04DF1211257072A60093A96C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04DF1213257072A60093A96C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +82,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		04AA7A6526E31C89005A6810 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04AA7A6B26E31C89005A6810 /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		04DF120B257072A60093A96C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -73,12 +114,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04AA7A6926E31C89005A6810 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				04AA7A6A26E31C89005A6810 /* NotificationCenter.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		04AA7A6C26E31C89005A6810 /* MinesweeperWidget */ = {
+			isa = PBXGroup;
+			children = (
+				04AA7A6D26E31C89005A6810 /* TodayViewController.swift */,
+				04AA7A6F26E31C89005A6810 /* TodayViewController.xib */,
+				04AA7A7226E31C89005A6810 /* Info.plist */,
+				04AA7A7326E31C89005A6810 /* InfoPlist.strings */,
+				04AA7A7626E31C89005A6810 /* MinesweeperWidget.entitlements */,
+			);
+			path = MinesweeperWidget;
+			sourceTree = "<group>";
+		};
 		04DF1205257072A60093A96C = {
 			isa = PBXGroup;
 			children = (
 				04DF1210257072A60093A96C /* Minesweeper */,
 				04DF1223257072A90093A96C /* MinesweeperTests */,
 				04DF122E257072A90093A96C /* MinesweeperUITests */,
+				04AA7A6C26E31C89005A6810 /* MinesweeperWidget */,
+				04AA7A6926E31C89005A6810 /* Frameworks */,
 				04DF120F257072A60093A96C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -89,6 +152,7 @@
 				04DF120E257072A60093A96C /* Minesweeper.app */,
 				04DF1220257072A90093A96C /* MinesweeperTests.xctest */,
 				04DF122B257072A90093A96C /* MinesweeperUITests.xctest */,
+				04AA7A6826E31C89005A6810 /* MinesweeperProductName.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -127,6 +191,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		04AA7A6726E31C89005A6810 /* MinesweeperWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04AA7A7C26E31C89005A6810 /* Build configuration list for PBXNativeTarget "MinesweeperWidget" */;
+			buildPhases = (
+				04AA7A6426E31C89005A6810 /* Sources */,
+				04AA7A6526E31C89005A6810 /* Frameworks */,
+				04AA7A6626E31C89005A6810 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MinesweeperWidget;
+			productName = MinesweeperWidget;
+			productReference = 04AA7A6826E31C89005A6810 /* MinesweeperProductName.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		04DF120D257072A60093A96C /* Minesweeper */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04DF1234257072A90093A96C /* Build configuration list for PBXNativeTarget "Minesweeper" */;
@@ -134,10 +215,12 @@
 				04DF120A257072A60093A96C /* Sources */,
 				04DF120B257072A60093A96C /* Frameworks */,
 				04DF120C257072A60093A96C /* Resources */,
+				04AA7A7D26E31C89005A6810 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				04AA7A7826E31C89005A6810 /* PBXTargetDependency */,
 			);
 			name = Minesweeper;
 			productName = Minesweeper;
@@ -187,9 +270,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1020;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Jack Leow";
 				TargetAttributes = {
+					04AA7A6726E31C89005A6810 = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
 					04DF120D257072A60093A96C = {
 						CreatedOnToolsVersion = 10.2.1;
 					};
@@ -219,11 +305,21 @@
 				04DF120D257072A60093A96C /* Minesweeper */,
 				04DF121F257072A90093A96C /* MinesweeperTests */,
 				04DF122A257072A90093A96C /* MinesweeperUITests */,
+				04AA7A6726E31C89005A6810 /* MinesweeperWidget */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		04AA7A6626E31C89005A6810 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04AA7A7126E31C89005A6810 /* TodayViewController.xib in Resources */,
+				04AA7A7526E31C89005A6810 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		04DF120C257072A60093A96C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -250,6 +346,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		04AA7A6426E31C89005A6810 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04AA7A6E26E31C89005A6810 /* TodayViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		04DF120A257072A60093A96C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -278,6 +382,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		04AA7A7826E31C89005A6810 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 04AA7A6726E31C89005A6810 /* MinesweeperWidget */;
+			targetProxy = 04AA7A7726E31C89005A6810 /* PBXContainerItemProxy */;
+		};
 		04DF1222257072A90093A96C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 04DF120D257072A60093A96C /* Minesweeper */;
@@ -291,6 +400,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		04AA7A6F26E31C89005A6810 /* TodayViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04AA7A7026E31C89005A6810 /* Base */,
+			);
+			name = TodayViewController.xib;
+			sourceTree = "<group>";
+		};
+		04AA7A7326E31C89005A6810 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04AA7A7426E31C89005A6810 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		04DF1217257072A90093A96C /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -302,6 +427,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		04AA7A7A26E31C89005A6810 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MinesweeperWidget/MinesweeperWidget.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MinesweeperWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = my.edu.clhs.Minesweeper.MinesweeperWidget;
+				PRODUCT_NAME = MinesweeperProductName;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		04AA7A7B26E31C89005A6810 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MinesweeperWidget/MinesweeperWidget.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MinesweeperWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = my.edu.clhs.Minesweeper.MinesweeperWidget;
+				PRODUCT_NAME = MinesweeperProductName;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		04DF1232257072A90093A96C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -420,8 +585,10 @@
 		04DF1235257072A90093A96C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Minesweeper/Minesweeper.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Minesweeper/Info.plist;
@@ -438,8 +605,10 @@
 		04DF1236257072A90093A96C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Minesweeper/Minesweeper.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Minesweeper/Info.plist;
@@ -534,6 +703,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		04AA7A7C26E31C89005A6810 /* Build configuration list for PBXNativeTarget "MinesweeperWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04AA7A7A26E31C89005A6810 /* Debug */,
+				04AA7A7B26E31C89005A6810 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		04DF1209257072A60093A96C /* Build configuration list for PBXProject "Minesweeper" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

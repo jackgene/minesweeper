@@ -1,20 +1,33 @@
 //
-//  ViewController.swift
-//  Minesweeper
+//  TodayViewController.swift
+//  MinesweeperWidget
 //
-//  Created by Jack Leow on 11/26/20.
-//  Copyright © 2020 Jack Leow. All rights reserved.
+//  Created by Jack Leow on 9/3/21.
+//  Copyright © 2021 Jack Leow. All rights reserved.
 //
 
 import Cocoa
+import NotificationCenter
 
-class ViewController: NSViewController {
-    static let cellSizePx = 32
+class TodayViewController: NSViewController, NCWidgetProviding {
+
+    override var nibName: NSNib.Name? {
+        return NSNib.Name("TodayViewController")
+    }
+
+    func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
+        // Update your data and prepare for a snapshot. Call completion handler when you are done
+        // with NoData if nothing has changed or NewData if there is new data since the last
+        // time we called you
+        completionHandler(.noData)
+    }
+
+    static let cellSizePx: Double = 304.0 / 9
 
     class Cell {
         let row: Int
         let col: Int
-        let game: ViewController
+        let game: TodayViewController
         let button: NSButton
         var isVisited: Bool {
             get {
@@ -41,22 +54,25 @@ class ViewController: NSViewController {
         }
         var neighboringMineCount: Int = 0
 
-        init(row: Int, col: Int, game: ViewController) {
+        init(row: Int, col: Int, game: TodayViewController) {
             self.row = row
             self.col = col
             self.game = game
             button = NSButton(
                 frame: CGRect(
-                    x: col * ViewController.cellSizePx, y: row * ViewController.cellSizePx - 1,
-                    width: ViewController.cellSizePx, height: ViewController.cellSizePx + 2
+                    x: Double(col) * TodayViewController.cellSizePx,
+                    y: Double(row) * TodayViewController.cellSizePx + 40,
+                    width: TodayViewController.cellSizePx,
+                    height: TodayViewController.cellSizePx + 2
                 )
             )
             button.font = NSFont.boldSystemFont(ofSize: 0)
             button.title = ""
+            button.alphaValue = 0.8
             button.bezelStyle = NSButton.BezelStyle.smallSquare
+            button.focusRingType = .none
             button.target = self
             button.action = #selector(visit)
-            button.focusRingType = .none
             game.view.addSubview(button)
         }
 
@@ -135,28 +151,7 @@ class ViewController: NSViewController {
     var mineTripped: Bool = false
     var cellsToVisit: Int = Int.max
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        self.view.frame = CGRect(
-            x: 20, y: 20,
-            width: colCount * ViewController.cellSizePx,
-            height: rowCount * ViewController.cellSizePx + 1
-        )
-        for row in 0..<rowCount {
-            for col in 0..<colCount {
-                cells[row].append(Cell(row: row, col: col, game: self))
-            }
-        }
-    }
-
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
-
-    @IBAction func clearMines(_ sender: Any) {
+    @objc func clearMines(_ sender: Any) {
         minesLaid = false
         mineTripped = false
         cellsToVisit = Int.max
@@ -170,44 +165,24 @@ class ViewController: NSViewController {
         }
     }
 
-    func changeLevel(rowCount: Int, colCount: Int, minesCount: Int) {
-        for row in cells {
-            for cell in row {
-                cell.button.removeFromSuperview()
-            }
-        }
-
-        self.rowCount = rowCount
-        self.colCount = colCount
-        self.minesCount = minesCount
-        self.cells = Array(
-            repeating: [],
-            count: rowCount
-        )
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
         for row in 0..<rowCount {
             for col in 0..<colCount {
                 cells[row].append(Cell(row: row, col: col, game: self))
             }
         }
-        var frame = self.view.window?.frame
-        frame?.size = NSSize(
-            width: colCount * ViewController.cellSizePx,
-            height: rowCount * ViewController.cellSizePx + 21
+        
+        let newGameButton: NSButton = NSButton(
+            frame: CGRect(x: 0, y: 0, width: 306, height: 32)
         )
-        self.view.window?.setFrame(frame!, display: true)
+        newGameButton.title = "New Game"
+        newGameButton.alphaValue = 0.8
+        newGameButton.bezelStyle = NSButton.BezelStyle.smallSquare
+        newGameButton.target = self
+        newGameButton.action = #selector(clearMines)
+        self.view.addSubview(newGameButton)
     }
 
-    @IBAction func changeLevelToBeginner(_ sender: Any) {
-        changeLevel(rowCount: 9, colCount: 9, minesCount: 10)
-    }
-
-    @IBAction func changeLevelToIntermediate(_ sender: Any) {
-        changeLevel(rowCount: 16, colCount: 16, minesCount: 40)
-    }
-    
-    @IBAction func changeLevelToAdvanced(_ sender: Any) {
-        changeLevel(rowCount: 16, colCount: 30, minesCount: 99)
-    }
-    
 }
