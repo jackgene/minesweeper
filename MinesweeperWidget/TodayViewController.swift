@@ -11,18 +11,8 @@ import NotificationCenter
 
 class TodayViewController: NSViewController, NCWidgetProviding {
 
-    override var nibName: NSNib.Name? {
-        return NSNib.Name("TodayViewController")
-    }
-
-    func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-        // Update your data and prepare for a snapshot. Call completion handler when you are done
-        // with NoData if nothing has changed or NewData if there is new data since the last
-        // time we called you
-        completionHandler(.noData)
-    }
-
-    static let cellSizePx: Double = 304.0 / 9
+    static let boardWidthPx: Double = 304
+    static let cellSizePx: Double = boardWidthPx / 9
 
     class Cell {
         let row: Int
@@ -61,7 +51,7 @@ class TodayViewController: NSViewController, NCWidgetProviding {
             button = NSButton(
                 frame: CGRect(
                     x: Double(col) * TodayViewController.cellSizePx,
-                    y: Double(row) * TodayViewController.cellSizePx + 40,
+                    y: Double(row) * TodayViewController.cellSizePx + 45,
                     width: TodayViewController.cellSizePx,
                     height: TodayViewController.cellSizePx + 2
                 )
@@ -173,9 +163,9 @@ class TodayViewController: NSViewController, NCWidgetProviding {
                 cells[row].append(Cell(row: row, col: col, game: self))
             }
         }
-        
+
         let newGameButton: NSButton = NSButton(
-            frame: CGRect(x: 0, y: 0, width: 306, height: 32)
+            frame: CGRect(x: 0, y: 0, width: Self.boardWidthPx, height: 32)
         )
         newGameButton.title = "New Game"
         newGameButton.alphaValue = 0.8
@@ -183,6 +173,16 @@ class TodayViewController: NSViewController, NCWidgetProviding {
         newGameButton.target = self
         newGameButton.action = #selector(clearMines)
         self.view.addSubview(newGameButton)
+        self.view.addConstraint(
+            NSLayoutConstraint(
+                item: newGameButton,
+                attribute: NSLayoutConstraint.Attribute.top,
+                relatedBy: NSLayoutConstraint.Relation.equal,
+                toItem: self.view,
+                attribute: NSLayoutConstraint.Attribute.top,
+                multiplier: 1, constant: CGFloat(Self.boardWidthPx + 16)
+            )
+        )
     }
 
 }
