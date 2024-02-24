@@ -14,6 +14,12 @@
 		0499CE152B824AE3005F53A7 /* MinesweeperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0499CE142B824AE3005F53A7 /* MinesweeperTests.swift */; };
 		0499CE1F2B824AE3005F53A7 /* MinesweeperUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0499CE1E2B824AE3005F53A7 /* MinesweeperUITests.swift */; };
 		0499CE212B824AE3005F53A7 /* MinesweeperUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0499CE202B824AE3005F53A7 /* MinesweeperUITestsLaunchTests.swift */; };
+		0499CE662B82F908005F53A7 /* MineField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0499CE652B82F908005F53A7 /* MineField.swift */; };
+		0499CE682B82F982005F53A7 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0499CE672B82F982005F53A7 /* Cell.swift */; };
+		0499CE6A2B839BA2005F53A7 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0499CE692B839BA2005F53A7 /* Point.swift */; };
+		0499CE6C2B839BE2005F53A7 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0499CE6B2B839BE2005F53A7 /* Size.swift */; };
+		0499CE6E2B84CED8005F53A7 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0499CE6D2B84CED8005F53A7 /* Input.swift */; };
+		0499CEE02B8A259E005F53A7 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0499CEDF2B8A259E005F53A7 /* Level.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +51,12 @@
 		0499CE1A2B824AE3005F53A7 /* MinesweeperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MinesweeperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0499CE1E2B824AE3005F53A7 /* MinesweeperUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinesweeperUITests.swift; sourceTree = "<group>"; };
 		0499CE202B824AE3005F53A7 /* MinesweeperUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinesweeperUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		0499CE652B82F908005F53A7 /* MineField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineField.swift; sourceTree = "<group>"; };
+		0499CE672B82F982005F53A7 /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
+		0499CE692B839BA2005F53A7 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		0499CE6B2B839BE2005F53A7 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
+		0499CE6D2B84CED8005F53A7 /* Input.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
+		0499CEDF2B8A259E005F53A7 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,10 +107,11 @@
 		0499CE012B824AE2005F53A7 /* Minesweeper */ = {
 			isa = PBXGroup;
 			children = (
-				0499CE022B824AE2005F53A7 /* MinesweeperApp.swift */,
-				0499CE042B824AE2005F53A7 /* ContentView.swift */,
-				0499CE062B824AE3005F53A7 /* Assets.xcassets */,
 				0499CE0B2B824AE3005F53A7 /* Minesweeper.entitlements */,
+				0499CE042B824AE2005F53A7 /* ContentView.swift */,
+				0499CE022B824AE2005F53A7 /* MinesweeperApp.swift */,
+				0499CE062B824AE3005F53A7 /* Assets.xcassets */,
+				0499CE642B82EA86005F53A7 /* Model */,
 				0499CE082B824AE3005F53A7 /* Preview Content */,
 			);
 			path = Minesweeper;
@@ -127,6 +140,19 @@
 				0499CE202B824AE3005F53A7 /* MinesweeperUITestsLaunchTests.swift */,
 			);
 			path = MinesweeperUITests;
+			sourceTree = "<group>";
+		};
+		0499CE642B82EA86005F53A7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0499CE672B82F982005F53A7 /* Cell.swift */,
+				0499CE6D2B84CED8005F53A7 /* Input.swift */,
+				0499CE652B82F908005F53A7 /* MineField.swift */,
+				0499CE692B839BA2005F53A7 /* Point.swift */,
+				0499CE6B2B839BE2005F53A7 /* Size.swift */,
+				0499CEDF2B8A259E005F53A7 /* Level.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,8 +285,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0499CE6E2B84CED8005F53A7 /* Input.swift in Sources */,
 				0499CE052B824AE2005F53A7 /* ContentView.swift in Sources */,
+				0499CE682B82F982005F53A7 /* Cell.swift in Sources */,
 				0499CE032B824AE2005F53A7 /* MinesweeperApp.swift in Sources */,
+				0499CE6A2B839BA2005F53A7 /* Point.swift in Sources */,
+				0499CE6C2B839BE2005F53A7 /* Size.swift in Sources */,
+				0499CEE02B8A259E005F53A7 /* Level.swift in Sources */,
+				0499CE662B82F908005F53A7 /* MineField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
