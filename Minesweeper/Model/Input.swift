@@ -45,20 +45,10 @@ enum Input {
                                 .mine
                             } else {
                                 .empty(
-                                    adjacentMines: (max(0, top - 1)...min(maxTop, top + 1))
-                                        .flatMap { (adjTop: UInt) in
-                                            (max(0, left - 1)...min(maxLeft, left + 1))
-                                                .compactMap { (adjLeft: UInt) in
-                                                    if mines.contains(
-                                                        Point(left: adjLeft, top: adjTop)
-                                                    ) {
-                                                        1
-                                                    } else {
-                                                        0
-                                                    }
-                                                }
-                                        }
-                                        .reduce(0) { $0 + $1 }
+                                    adjacentMines: Point(left: left, top: top)
+                                        .adjacentPoints(withinWorldOfSize: level.size)
+                                        .filter(mines.contains)
+                                        .count
                                 )
                             }
                         }
@@ -67,23 +57,35 @@ enum Input {
                 )
                 
             case .sweeping(let cells, let currentRemaining):
+                let visitedTop: Int = Int(visitedPoint.top)
+                let visitedLeft: Int = Int(visitedPoint.left)
                 var nextRemaining: Set<Point> = currentRemaining
+                
                 if let removed: Point = nextRemaining.remove(visitedPoint) {
                     if nextRemaining.isEmpty {
                         return .swept(cells: cells)
                     } else {
-                        return .sweeping(cells: cells, remaining: nextRemaining)
+                        let next: MineField = .sweeping(
+                            cells: cells, remaining: nextRemaining
+                        )
+                        
+                        if case .empty(0) = cells[visitedTop][visitedLeft] {
+                            return next
+                        } else {
+                            return visitedPoint.adjacentPoints(withinWorldOfSize: cells.size)
+                                .reduce(next) { (nextNext: MineField, adjPoint: Point) in
+                                    Input.visit(position: adjPoint).update(mineField: nextNext)
+                                }
+                        }
                     }
                 } else {
-                    let visitedTop: Int = Int(visitedPoint.top)
-                    let visitedLeft: Int = Int(visitedPoint.left)
                     if case .mine = cells[visitedTop][visitedLeft] {
                         return .tripped(
                             cells: cells, mine: visitedPoint, remaining: currentRemaining
                         )
                     } else {
-                        // This could happen in cases where a buggy UI
-                        // allows a cell to be visited more than once
+                        // This could happen when expanding cells with no adjacent mines.
+                        // Or in cases where a buggy UI allows a cell to be visited more than once.
                         return mineField
                     }
                 }
