@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Size {
+struct Size: Equatable {
     let width: UInt
     let height: UInt
 }
