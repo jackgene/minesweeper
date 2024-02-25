@@ -16,15 +16,13 @@ struct Point: Equatable, Hashable {
             return []
         }
         
-        let maxLeft: UInt = size.width - 1
-        let maxTop: UInt = size.height - 1
         let adjLeftFrom: UInt = left > 0 ? left - 1 : 0
-        let adjLeftTo: UInt = left < maxLeft ? left + 1 : maxLeft
+        let adjLeftTo: UInt = left < size.width ? left + 1 : size.width
         let adjTopFrom: UInt = top > 0 ? top - 1 : 0
-        let adjTopTo: UInt = top < maxTop ? top + 1 : maxTop
+        let adjTopTo: UInt = top < size.height ? top + 1 : size.height
         
-        return (adjLeftFrom...adjLeftTo).flatMap { (adjLeft: UInt) in
-            (adjTopFrom...adjTopTo).compactMap { (adjTop: UInt) in
+        return (adjLeftFrom..<adjLeftTo).flatMap { (adjLeft: UInt) in
+            (adjTopFrom..<adjTopTo).compactMap { (adjTop: UInt) in
                 if top != adjTop && left != adjLeft {
                     Point(left: adjLeft, top: adjTop)
                 } else {

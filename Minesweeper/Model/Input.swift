@@ -17,11 +17,9 @@ enum Input {
         case .visit(let visitedPoint):
             switch mineField {
             case .uninitialized(let level):
-                let maxLeft: UInt = level.size.width - 1
-                let maxTop: UInt = level.size.height - 1
-                let availablePositions: [Point] = (0...maxTop)
+                let availablePositions: [Point] = (0..<level.size.height)
                     .flatMap { (top: UInt) in
-                        (0...maxLeft).compactMap { (left: UInt) in
+                        (0..<level.size.width).compactMap { (left: UInt) in
                             if visitedPoint.left == left && visitedPoint.top == top {
                                 nil // First visited position is never navailable
                             } else {
@@ -39,8 +37,8 @@ enum Input {
                 )
                 
                 return .sweeping(
-                    cells: (0...maxTop).map { (top: UInt) in
-                        (0...maxLeft).map { (left: UInt) in
+                    cells: (0..<level.size.height).map { (top: UInt) in
+                        (0..<level.size.width).map { (left: UInt) in
                             if mines.contains(Point(left: left, top: top)) {
                                 .mine
                             } else {
