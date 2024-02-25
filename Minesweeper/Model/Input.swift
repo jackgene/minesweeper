@@ -72,9 +72,12 @@ enum Input {
                         if case .empty(0) = cells[visitedTop][visitedLeft] {
                             return next
                         } else {
-                            return visitedPoint.adjacentPoints(withinWorldOfSize: cells.size)
+                            return visitedPoint
+                                .adjacentPoints(withinWorldOfSize: cells.size)
+                                .filter(nextRemaining.contains)
                                 .reduce(next) { (nextNext: MineField, adjPoint: Point) in
-                                    Input.visit(position: adjPoint).update(mineField: nextNext)
+                                    Input.visit(position: adjPoint)
+                                        .update(mineField: nextNext)
                                 }
                         }
                     }
@@ -84,8 +87,8 @@ enum Input {
                             cells: cells, mine: visitedPoint, remaining: currentRemaining
                         )
                     } else {
-                        // This could happen when expanding cells with no adjacent mines.
-                        // Or in cases where a buggy UI allows a cell to be visited more than once.
+                        // This could happen when a buggy UI allows
+                        // a cell to be visited more than once.
                         return mineField
                     }
                 }
