@@ -15,6 +15,7 @@ fileprivate let defaultLevel: Level = Level(
 class ViewModel: ObservableObject {
     @Published var inputs: Input = .startOver(level: defaultLevel)
     @Published var cells: [[String?]] = []
+    @Published var resetable: Bool = false
     
     init() {
         let mineFields: some Publisher<MineField, Never> = $inputs
@@ -80,6 +81,15 @@ class ViewModel: ObservableObject {
                 }
             }
             .assign(to: &$cells)
+        
+        mineFields
+            .map {
+                switch $0 {
+                case .uninitialized(_): false
+                case .sweeping(_, _), .tripped(_, _), .swept(_): true
+                }
+            }
+            .assign(to: &$resetable)
 //        mineFields
 //            .map {
 //                return switch $0 {
@@ -118,7 +128,7 @@ struct ContentView: View {
     @StateObject var viewModel: ViewModel = ViewModel()
     
     var body: some View {
-        VStack {
+        VStack(spacing: 20) {
             Grid {
                 ForEach(
                     Array(viewModel.cells.enumerated()), id: \.offset
@@ -137,22 +147,28 @@ struct ContentView: View {
                                             top: UInt(top)
                                         )
                                     )
-                                },
-                                label: { Text(label ?? "") }
-                            )
+                                }
+                            ) {
+                                Text(label ?? "")
+                                    .font(.title)
+                                    .frame(width: 20, height: 30)
+                            }
                             .disabled(label != nil)
+                            .focusable(false)
                         }
                     }
+                    .padding(-3)
                 }
             }
+            
             Button(
                 action: {
                     viewModel.inputs = .startOver(level: defaultLevel)
-                },
-                label: {
-                    Text("New Game")
                 }
-            )
+            ) {
+                Text("New Game").font(.title2)
+            }
+            .disabled(!viewModel.resetable)
         }
         .padding()
     }
