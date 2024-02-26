@@ -41,7 +41,7 @@ enum Input {
                     .flatMap { (top: UInt) in
                         (0..<level.size.width).compactMap { (left: UInt) in
                             if visitedPoint.left == left && visitedPoint.top == top {
-                                nil // First visited position is never navailable
+                                nil // First visited position is never available
                             } else {
                                 Point(left: left, top: top)
                             }
