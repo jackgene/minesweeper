@@ -9,6 +9,26 @@ enum Input {
     case visit(position: Point)
     case startOver(level: Level)
     
+    private func expandVisitIfSafeTo(
+        _ visitedPoint: Point, _ remaining: Set<Point>, _ cells: [[Cell]]
+    ) -> Set<Point> {
+        guard
+            case .empty(0) = cells[Int(visitedPoint.top)][Int(visitedPoint.left)]
+        else {
+            return remaining
+        }
+
+        let adjacentPoints: [Point] = visitedPoint
+            .adjacentPoints(withinWorldOfSize: cells.size)
+            .filter(remaining.contains)
+        return adjacentPoints
+            .reduce(
+                remaining.subtracting(adjacentPoints)
+            ) { (nextRemaining: Set<Point>, adjPoint: Point) in
+                expandVisitIfSafeTo(adjPoint, nextRemaining, cells)
+            }
+    }
+    
     func update(mineField: MineField) -> MineField {
         switch self {
         case .startOver(let level):
@@ -35,23 +55,24 @@ enum Input {
                 let remaining: Set<Point> = Set(
                     availablePositions.dropFirst(mineCount)
                 )
+                let cells: [[Cell]] = (0..<level.size.height).map { (top: UInt) in
+                    (0..<level.size.width).map { (left: UInt) in
+                        if mines.contains(Point(left: left, top: top)) {
+                            .mine
+                        } else {
+                            .empty(
+                                adjacentMines: Point(left: left, top: top)
+                                    .adjacentPoints(withinWorldOfSize: level.size)
+                                    .filter(mines.contains)
+                                    .count
+                            )
+                        }
+                    }
+                }
                 
                 return .sweeping(
-                    cells: (0..<level.size.height).map { (top: UInt) in
-                        (0..<level.size.width).map { (left: UInt) in
-                            if mines.contains(Point(left: left, top: top)) {
-                                .mine
-                            } else {
-                                .empty(
-                                    adjacentMines: Point(left: left, top: top)
-                                        .adjacentPoints(withinWorldOfSize: level.size)
-                                        .filter(mines.contains)
-                                        .count
-                                )
-                            }
-                        }
-                    },
-                    remaining: remaining
+                    cells: cells,
+                    remaining: expandVisitIfSafeTo(visitedPoint, remaining, cells)
                 )
                 
             case .sweeping(let cells, let currentRemaining):
@@ -59,25 +80,16 @@ enum Input {
                 let visitedLeft: Int = Int(visitedPoint.left)
                 var nextRemaining: Set<Point> = currentRemaining
                 
-                if let removed: Point = nextRemaining.remove(visitedPoint) {
+                if let _ = nextRemaining.remove(visitedPoint) {
                     if nextRemaining.isEmpty {
                         return .swept(cells: cells)
                     } else {
-                        let next: MineField = .sweeping(
-                            cells: cells, remaining: nextRemaining
+                        return .sweeping(
+                            cells: cells,
+                            remaining: expandVisitIfSafeTo(
+                                visitedPoint, nextRemaining, cells
+                            )
                         )
-                        
-                        if case .empty(0) = cells[visitedTop][visitedLeft] {
-                            return next
-                        } else {
-                            return visitedPoint
-                                .adjacentPoints(withinWorldOfSize: cells.size)
-                                .filter(nextRemaining.contains)
-                                .reduce(next) { (nextNext: MineField, adjPoint: Point) in
-                                    Input.visit(position: adjPoint)
-                                        .update(mineField: nextNext)
-                                }
-                        }
                     }
                 } else {
                     if case .mine = cells[visitedTop][visitedLeft] {
