@@ -81,9 +81,7 @@ enum Input {
                     }
                 } else {
                     if case .mine = cells[visitedTop][visitedLeft] {
-                        return .tripped(
-                            cells: cells, mine: visitedPoint, remaining: currentRemaining
-                        )
+                        return .tripped(cells: cells, mine: visitedPoint)
                     } else {
                         // This could happen when a buggy UI allows
                         // a cell to be visited more than once.
@@ -91,7 +89,7 @@ enum Input {
                     }
                 }
                 
-            case .swept(_), .tripped(_, _, _):
+            case .swept(_), .tripped(_, _):
                 return mineField
             }
         }
