@@ -7,18 +7,14 @@
 
 import Combine
 
-let defaultLevel: Level = Level(
-    size: Size(width: 9, height: 9), mines: 10
-)
-
 class AppState: ObservableObject {
-    @Published var inputs: Input = .startOver(level: defaultLevel)
+    @Published var inputs: Input = .startOver
     @Published var cells: [[String?]] = []
     @Published var resetable: Bool = false
     
     init() {
         let mineFields: some Publisher<MineField, Never> = $inputs
-            .scan(.uninitialized(level: defaultLevel)) { (lastMineField: MineField, input: Input) in
+            .scan(.uninitialized(level: .beginner)) { (lastMineField: MineField, input: Input) in
                 let nextMineField: MineField = input.update(mineField: lastMineField)
                 return nextMineField
             }

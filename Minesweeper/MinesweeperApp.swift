@@ -33,10 +33,27 @@ struct MinesweeperApp: App {
         .commands {
             CommandMenu("Game") {
                 Button("New") {
-                    appState.inputs = .startOver(level: defaultLevel)
+                    appState.inputs = .startOver
                 }
                 .keyboardShortcut("N")
                 .disabled(!appState.resetable)
+                
+                Menu("Difficulty") {
+                    Button("Beginner") {
+                        appState.inputs = .changeLevel(level: .beginner)
+                    }
+                    .keyboardShortcut("1")
+                    
+                    Button("Intermediate") {
+                        appState.inputs = .changeLevel(level: .intermediate)
+                    }
+                    .keyboardShortcut("2")
+                    
+                    Button("Advanced") {
+                        appState.inputs = .changeLevel(level: .advanced)
+                    }
+                    .keyboardShortcut("3")
+                }
             }
         }
         .windowResizability(.contentSize)

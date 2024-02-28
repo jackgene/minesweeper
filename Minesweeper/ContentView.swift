@@ -51,7 +51,7 @@ struct ContentView: View {
             
             Button(
                 action: {
-                    appState.inputs = .startOver(level: defaultLevel)
+                    appState.inputs = .startOver
                 }
             ) {
                 Text("New Game").font(.title2)

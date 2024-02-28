@@ -7,7 +7,8 @@
 
 enum Input {
     case visit(position: Point)
-    case startOver(level: Level)
+    case startOver
+    case changeLevel(level: Level)
     
     private func expandVisitIfSafeTo(
         _ visitedPoint: Point, _ remaining: Set<Point>, _ cells: [[Cell]]
@@ -31,12 +32,9 @@ enum Input {
     
     func update(mineField: MineField) -> MineField {
         switch self {
-        case .startOver(let level):
-            return .uninitialized(level: level)
-            
         case .visit(let visitedPoint):
             switch mineField {
-            case .uninitialized(let level):
+            case .uninitialized(level: let level):
                 let availablePositions: [Point] = (0..<level.size.height)
                     .flatMap { (top: UInt) in
                         (0..<level.size.width).compactMap { (left: UInt) in
@@ -75,7 +73,7 @@ enum Input {
                     remaining: expandVisitIfSafeTo(visitedPoint, remaining, cells)
                 )
                 
-            case .sweeping(let cells, let currentRemaining):
+            case .sweeping(cells: let cells, remaining: let currentRemaining):
                 let visitedTop: Int = Int(visitedPoint.top)
                 let visitedLeft: Int = Int(visitedPoint.left)
                 var nextRemaining: Set<Point> = currentRemaining
@@ -104,6 +102,31 @@ enum Input {
             case .swept(_), .tripped(_, _):
                 return mineField
             }
+            
+        case .startOver:
+            switch mineField {
+            case .uninitialized(level: let level):
+                return .uninitialized(level: level)
+            case .sweeping(cells: let cells, _),
+                    .tripped(cells: let cells, _),
+                    .swept(cells: let cells):
+                let mines: Int = cells
+                    .flatMap { $0 }
+                    .filter {
+                        if case .mine = $0 { 
+                            true
+                        } else {
+                            false
+                        }
+                    }
+                    .count
+                return .uninitialized(
+                    level: Level(size: cells.size, mines: UInt(mines))
+                )
+            }
+            
+        case .changeLevel(level: let level):
+            return .uninitialized(level: level)
         }
     }
 }
