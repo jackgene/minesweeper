@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0492AD5A2B8EE9B100A81B2A /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0492AD592B8EE9B100A81B2A /* AppState.swift */; };
 		0499CE032B824AE2005F53A7 /* MinesweeperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0499CE022B824AE2005F53A7 /* MinesweeperApp.swift */; };
 		0499CE052B824AE2005F53A7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0499CE042B824AE2005F53A7 /* ContentView.swift */; };
 		0499CE072B824AE3005F53A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0499CE062B824AE3005F53A7 /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0492AD592B8EE9B100A81B2A /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		0499CDFF2B824AE2005F53A7 /* Minesweeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Minesweeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0499CE022B824AE2005F53A7 /* MinesweeperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinesweeperApp.swift; sourceTree = "<group>"; };
 		0499CE042B824AE2005F53A7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				0499CE0B2B824AE3005F53A7 /* Minesweeper.entitlements */,
+				0492AD592B8EE9B100A81B2A /* AppState.swift */,
 				0499CE042B824AE2005F53A7 /* ContentView.swift */,
 				0499CE022B824AE2005F53A7 /* MinesweeperApp.swift */,
 				0499CE062B824AE3005F53A7 /* Assets.xcassets */,
@@ -147,10 +150,10 @@
 			children = (
 				0499CE672B82F982005F53A7 /* Cell.swift */,
 				0499CE6D2B84CED8005F53A7 /* Input.swift */,
+				0499CEDF2B8A259E005F53A7 /* Level.swift */,
 				0499CE652B82F908005F53A7 /* MineField.swift */,
 				0499CE692B839BA2005F53A7 /* Point.swift */,
 				0499CE6B2B839BE2005F53A7 /* Size.swift */,
-				0499CEDF2B8A259E005F53A7 /* Level.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				0499CE6E2B84CED8005F53A7 /* Input.swift in Sources */,
 				0499CE052B824AE2005F53A7 /* ContentView.swift in Sources */,
 				0499CE682B82F982005F53A7 /* Cell.swift in Sources */,
+				0492AD5A2B8EE9B100A81B2A /* AppState.swift in Sources */,
 				0499CE032B824AE2005F53A7 /* MinesweeperApp.swift in Sources */,
 				0499CE6A2B839BA2005F53A7 /* Point.swift in Sources */,
 				0499CE6C2B839BE2005F53A7 /* Size.swift in Sources */,
@@ -459,6 +463,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Minesweeper/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -484,6 +489,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Minesweeper/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
