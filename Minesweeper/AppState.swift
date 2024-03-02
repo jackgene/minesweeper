@@ -7,13 +7,42 @@
 
 import Combine
 
+class CellState: ObservableObject {
+    @Published var label: String? = nil
+}
 class AppState: ObservableObject {
-    @Published var inputs: Input = .startOver
-    @Published var cells: [[String?]] = []
+    @Published var size: Size = Size(width: 0, height: 0)
+    @Published var cells: [[CellState]] = []
     @Published var resetable: Bool = false
+    let input: some Subject<Input, Never> = CurrentValueSubject(
+        .changeLevel(level: .beginner)
+    )
+    
+    private var cancellables: Set<AnyCancellable> = []
     
     init() {
-        let mineFields: some Publisher<MineField, Never> = $inputs
+        input
+            .compactMap {
+                switch $0 {
+                case .changeLevel(level: let level):
+                    level.size
+                case .startOver, .visit(_):
+                    nil
+                }
+            }
+            .assign(to: &$size)
+        
+        $size
+            .map { (size: Size) in
+                (0..<size.height).map { _ in
+                    (0..<size.width).map { _ in
+                        CellState()
+                    }
+                }
+            }
+            .assign(to: &$cells)
+        
+        let mineFields: some Publisher<MineField, Never> = input
             .scan(.uninitialized(level: .beginner)) { (lastMineField: MineField, input: Input) in
                 let nextMineField: MineField = input.update(mineField: lastMineField)
                 return nextMineField
@@ -75,7 +104,16 @@ class AppState: ObservableObject {
                     }
                 }
             }
-            .assign(to: &$cells)
+            .sink { (labels: [[String?]]) in
+                for (labels, cells): ([String?], [CellState]) in zip(labels, self.cells) {
+                    for (label, cell): (String?, CellState) in zip(labels, cells) {
+                        if cell.label != label {
+                            cell.label = label
+                        }
+                    }
+                }
+            }
+            .store(in: &cancellables)
         
         mineFields
             .map {
@@ -84,38 +122,8 @@ class AppState: ObservableObject {
                 case .sweeping(_, _), .tripped(_, _), .swept(_): true
                 }
             }
+            .removeDuplicates()
             .assign(to: &$resetable)
-//        mineFields
-//            .map {
-//                return switch $0 {
-//                case .uninitialized(level: let level):
-//                    level.size
-//                case .sweeping(cells: let cells, _),
-//                        .tripped(cells: let cells, _),
-//                        .swept(cells: let cells):
-//                    cells.size
-//                }
-//            }
-//            .removeDuplicates { $0 != $1 }
-//            .map { (size: Size) in
-//                (0..<Int(size.height)).map { (row: Int) in
-//                    (0..<Int(size.width)).map { (col: Int) in
-//                        mineFields.map {
-//                            switch $0 {
-//                            case .uninitialized(_):
-//                                nil
-//                            case .sweeping(cells: _, remaining: _):
-//                                "!"
-//                            case .tripped(cells: _, mine: _):
-//                                "💥"
-//                            case .swept(cells: _):
-//                                "🧹"
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//            .assign(to: &$cells)
     }
 }
 

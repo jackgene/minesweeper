@@ -9,8 +9,6 @@ import SwiftUI
 
 @objc
 class AppDelegate: NSObject, NSApplicationDelegate {
-    var token: NSKeyValueObservation?
-    
     func applicationShouldTerminateAfterLastWindowClosed(
         _ sender: NSApplication
     ) -> Bool {
@@ -33,24 +31,24 @@ struct MinesweeperApp: App {
         .commands {
             CommandMenu("Game") {
                 Button("New") {
-                    appState.inputs = .startOver
+                    appState.input.send(.startOver)
                 }
                 .keyboardShortcut("N")
                 .disabled(!appState.resetable)
                 
                 Menu("Difficulty") {
                     Button("Beginner") {
-                        appState.inputs = .changeLevel(level: .beginner)
+                        appState.input.send(.changeLevel(level: .beginner))
                     }
                     .keyboardShortcut("1")
                     
                     Button("Intermediate") {
-                        appState.inputs = .changeLevel(level: .intermediate)
+                        appState.input.send(.changeLevel(level: .intermediate))
                     }
                     .keyboardShortcut("2")
                     
                     Button("Advanced") {
-                        appState.inputs = .changeLevel(level: .advanced)
+                        appState.input.send(.changeLevel(level: .advanced))
                     }
                     .keyboardShortcut("3")
                 }

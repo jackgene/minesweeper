@@ -7,6 +7,33 @@
 
 import SwiftUI
 
+struct CellView: View {
+    private let position: Point
+    private let app: AppState
+    @ObservedObject
+    private var cellState: CellState
+    
+    init(position: Point, app: AppState, cellState: CellState) {
+        self.position = position
+        self.app = app
+        self.cellState = cellState
+    }
+    
+    var body: some View {
+        Button(
+            action: {
+                app.input.send(.visit(position: position))
+            }
+        ) {
+            Text(cellState.label ?? "")
+                .font(.title)
+                .frame(width: 20, height: 30)
+        }
+        .disabled(cellState.label != nil)
+        .focusable(false)
+    }
+}
+
 struct ContentView: View {
     @ObservedObject
     private var appState: AppState
@@ -19,30 +46,17 @@ struct ContentView: View {
         VStack(spacing: 20) {
             Grid {
                 ForEach(
-                    Array(appState.cells.enumerated()), id: \.offset
-                ) { (top: Int, labels: [String?]) in
+                    0..<appState.size.height, id: \.self
+                ) { (top: UInt) in
                     
                     GridRow {
                         ForEach(
-                            Array(labels.enumerated()), id: \.offset
-                        ) { (left: Int, label: String?) in
-                            
-                            Button(
-                                action: {
-                                    appState.inputs = .visit(
-                                        position: Point(
-                                            left: UInt(left),
-                                            top: UInt(top)
-                                        )
-                                    )
-                                }
-                            ) {
-                                Text(label ?? "")
-                                    .font(.title)
-                                    .frame(width: 20, height: 30)
-                            }
-                            .disabled(label != nil)
-                            .focusable(false)
+                            0..<appState.size.width, id: \.self
+                        ) { (left: UInt) in
+                            CellView(
+                                position: Point(left: left, top: top),
+                                app: appState, cellState: appState.cells[Int(top)][Int(left)]
+                            )
                         }
                     }
                     .padding(-3)
@@ -51,7 +65,7 @@ struct ContentView: View {
             
             Button(
                 action: {
-                    appState.inputs = .startOver
+                    appState.input.send(.startOver)
                 }
             ) {
                 Text("New Game").font(.title2)
