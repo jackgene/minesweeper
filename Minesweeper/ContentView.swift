@@ -31,7 +31,7 @@ struct CellView: View {
         }
         .disabled(cellState.label != nil)
         .focusable(false)
-        .padding(-3)
+        .padding(-3.5)
     }
 }
 
