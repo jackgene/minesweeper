@@ -9,20 +9,20 @@ import SwiftUI
 
 struct CellView: View {
     private let position: Point
-    private let app: AppState
+    private let appState: AppState
     @ObservedObject
     private var cellState: CellState
     
     init(position: Point, app: AppState, cellState: CellState) {
         self.position = position
-        self.app = app
+        self.appState = app
         self.cellState = cellState
     }
     
     var body: some View {
         Button(
             action: {
-                app.input.send(.visit(position: position))
+                appState.input.send(.visit(position: position))
             }
         ) {
             Text(cellState.label ?? "")
