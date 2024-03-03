@@ -79,15 +79,16 @@ enum Input {
                 var nextRemaining: Set<Point> = currentRemaining
                 
                 if let _ = nextRemaining.remove(visitedPoint) {
+                    if !nextRemaining.isEmpty {
+                        nextRemaining = expandVisitIfSafeTo(
+                            visitedPoint, nextRemaining, cells
+                        )
+                    }
+                    
                     if nextRemaining.isEmpty {
                         return .swept(cells: cells)
                     } else {
-                        return .sweeping(
-                            cells: cells,
-                            remaining: expandVisitIfSafeTo(
-                                visitedPoint, nextRemaining, cells
-                            )
-                        )
+                        return .sweeping(cells: cells, remaining: nextRemaining)
                     }
                 } else {
                     if case .mine = cells[visitedTop][visitedLeft] {
