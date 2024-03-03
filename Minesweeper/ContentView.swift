@@ -31,6 +31,7 @@ struct CellView: View {
         }
         .disabled(cellState.label != nil)
         .focusable(false)
+        .padding(-3)
     }
 }
 
@@ -44,23 +45,21 @@ struct ContentView: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            Grid {
-                ForEach(
-                    0..<appState.size.height, id: \.self
-                ) { (top: UInt) in
-                    
-                    GridRow {
-                        ForEach(
-                            0..<appState.size.width, id: \.self
-                        ) { (left: UInt) in
-                            CellView(
-                                position: Point(left: left, top: top),
-                                app: appState, cellState: appState.cells[Int(top)][Int(left)]
-                            )
-                        }
+            ForEach(
+                0..<appState.size.height, id: \.self
+            ) { (top: UInt) in
+                
+                HStack {
+                    ForEach(
+                        0..<appState.size.width, id: \.self
+                    ) { (left: UInt) in
+                        CellView(
+                            position: Point(left: left, top: top),
+                            app: appState, cellState: appState.cells[Int(top)][Int(left)]
+                        )
                     }
-                    .padding(-3)
                 }
+                .padding(-6)
             }
             
             Button(
