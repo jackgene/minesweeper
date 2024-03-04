@@ -7,24 +7,13 @@
 
 import SwiftUI
 
-@objc
-class AppDelegate: NSObject, NSApplicationDelegate {
-    func applicationShouldTerminateAfterLastWindowClosed(
-        _ sender: NSApplication
-    ) -> Bool {
-        return true
-    }
-}
-
 @main
 struct MinesweeperApp: App {
     @StateObject
     private var appState: AppState = AppState()
-    @NSApplicationDelegateAdaptor(AppDelegate.self)
-    private var appDelegate: AppDelegate
     
     var body: some Scene {
-        WindowGroup {
+        Window("Minesweeper", id: "main") {
             ContentView(appState: appState)
         }
         .commandsRemoved()
