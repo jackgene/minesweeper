@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MineField {
+enum MineField: Codable {
     case uninitialized(level: Level)
     case sweeping(cells: [[Cell]], remaining: Set<Point>)
     case tripped(cells: [[Cell]], mine: Point)

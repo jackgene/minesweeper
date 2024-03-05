@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Point: Equatable, Hashable {
+struct Point: Equatable, Hashable, Codable {
     let left: UInt
     let top: UInt
     

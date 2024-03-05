@@ -5,7 +5,7 @@
 //  Created by Jack Leow on 2/24/24.
 //
 
-struct Level {
+struct Level: Codable {
     static let beginner: Level = Level(
         size: Size(width: 9, height: 9), mines: 10
     )
