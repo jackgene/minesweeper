@@ -50,62 +50,8 @@ class AppState: ObservableObject {
             .share()
         
         mineFields
-            .map {
-                switch $0 {
-                case .uninitialized(level: let level):
-                    (0..<level.size.height).map { _ in
-                        (0..<level.size.width).map { _ in
-                            nil
-                        }
-                    }
-                    
-                case .sweeping(cells: let cells, remaining: let remaining):
-                    cells.enumerated().map { (top: Int, cells: [Cell]) in
-                        cells.enumerated().map { (left: Int, cell: Cell) in
-                            if remaining.contains(Point(left: UInt(left), top: UInt(top))) {
-                                nil
-                            } else {
-                                switch cell {
-                                case .empty(adjacentMines: let count):
-                                    count > 0 ? "\(count)" : ""
-                                case .mine:
-                                    nil
-                                }
-                            }
-                        }
-                    }
-                    
-                case .tripped(cells: let cells, mine: let mine):
-                    cells.enumerated().map { (top: Int, cells: [Cell]) in
-                        cells.enumerated().map { (left: Int, cell: Cell) in
-                            switch cell {
-                            case .empty(adjacentMines: let count):
-                                count > 0 ? "\(count)" : ""
-                            case .mine:
-                                if Point(left: UInt(left), top: UInt(top)) == mine {
-                                    "💥"
-                                } else {
-                                    "💣"
-                                }
-                            }
-                        }
-                    }
-
-                case .swept(cells: let cells):
-                    cells.map { (cells: [Cell]) in
-                        cells.map { (cell: Cell) in
-                            switch cell {
-                            case .empty(adjacentMines: let count):
-                                count > 0 ? "\(count)" : ""
-                            case .mine:
-                                "🚩"
-                            }
-                        }
-                    }
-                }
-            }
-            .sink { (labels: [[String?]]) in
-                for (labels, cells): ([String?], [CellState]) in zip(labels, self.cells) {
+            .sink {
+                for (labels, cells): ([String?], [CellState]) in zip($0.cellLabels, self.cells) {
                     for (label, cell): (String?, CellState) in zip(labels, cells) {
                         if cell.label != label {
                             cell.label = label
