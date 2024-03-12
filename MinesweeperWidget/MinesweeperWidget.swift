@@ -11,7 +11,7 @@ import WidgetKit
 struct Provider: TimelineProvider {
     private var mineField: MineField {
         if
-            let mineFieldJSON: Data = UserDefaults.standard.data(forKey: mineFieldJSONKey),
+            let mineFieldJSON: Data = store.data(forKey: mineFieldJSONKey),
             let mineField: MineField = try? .from(json: mineFieldJSON)
         {
             mineField

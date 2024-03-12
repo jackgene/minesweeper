@@ -8,13 +8,17 @@
 import AppIntents
 import SwiftUI
 
+let store: UserDefaults = UserDefaults(
+    suiteName: Bundle.main
+        .infoDictionary!["NSExtensionFileProviderDocumentGroup"] as? String
+)!
 let mineFieldJSONKey: String = "mineFieldJSON"
 
 struct StartOverIntent: AppIntent {
     static var title: LocalizedStringResource = "Start Over"
     
     func perform() async throws -> some IntentResult {
-        UserDefaults.standard.setValue(Data(), forKey: mineFieldJSONKey)
+        store.setValue(Data(), forKey: mineFieldJSONKey)
         
         return .result()
     }
@@ -40,7 +44,6 @@ struct VisitCellIntent: AppIntent {
     }
     
     func perform() async throws -> some IntentResult {
-        let store: UserDefaults = .standard
         if let mineFieldJSON: Data = store.data(forKey: mineFieldJSONKey) {
             let lastMineField: MineField = (
                 try? .from(json: mineFieldJSON)

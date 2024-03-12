@@ -87,6 +87,7 @@
 
 /* Begin PBXFileReference section */
 		04201ED12B9E89DA001FA022 /* AppIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntents.swift; sourceTree = "<group>"; };
+		04201ED72BA08717001FA022 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		0492AD592B8EE9B100A81B2A /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		0492ADD42B98093F00A81B2A /* MinesweeperWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MinesweeperWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0492ADD62B98093F00A81B2A /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -197,6 +198,7 @@
 		0499CE012B824AE2005F53A7 /* Minesweeper */ = {
 			isa = PBXGroup;
 			children = (
+				04201ED72BA08717001FA022 /* Info.plist */,
 				0499CE0B2B824AE3005F53A7 /* Minesweeper.entitlements */,
 				0492AD592B8EE9B100A81B2A /* AppState.swift */,
 				0499CE042B824AE2005F53A7 /* ContentView.swift */,
@@ -663,6 +665,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Minesweeper/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Minesweeper/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -691,6 +695,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Minesweeper/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Minesweeper/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
