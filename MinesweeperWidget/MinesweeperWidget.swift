@@ -5,7 +5,6 @@
 //  Created by Jack Leow on 3/5/24.
 //
 
-import OSLog
 import SwiftUI
 import WidgetKit
 
