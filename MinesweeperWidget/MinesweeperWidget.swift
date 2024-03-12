@@ -70,6 +70,7 @@ struct MinesweeperWidgetEntryView : View {
                         .focusable(false)
                         .padding(-6)
                         .cornerRadius(2)
+                        .foregroundStyle(.gray)
                     }
                 }
                 .padding(-8)
@@ -92,7 +93,7 @@ struct MinesweeperWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             MinesweeperWidgetEntryView(entry: entry)
-                .containerBackground(.background, for: .widget)
+                .containerBackground(.white, for: .widget)
         }
         .configurationDisplayName("Minesweeper")
         .description("Minesweeper")
