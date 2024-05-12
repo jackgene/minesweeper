@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Cell: Codable {
+public enum Cell: Codable {
     case empty(adjacentMines: Int)
     case mine
 }

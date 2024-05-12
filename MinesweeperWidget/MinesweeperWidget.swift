@@ -5,6 +5,7 @@
 //  Created by Jack Leow on 3/5/24.
 //
 
+import MinesweeperFramework
 import SwiftUI
 import WidgetKit
 

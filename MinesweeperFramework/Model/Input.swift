@@ -5,7 +5,7 @@
 //  Created by Jack Leow on 2/20/24.
 //
 
-enum Input {
+public enum Input {
     case visit(position: Point)
     case startOver
     case changeLevel(level: Level)
@@ -30,7 +30,7 @@ enum Input {
             }
     }
     
-    func update(mineField: MineField) -> MineField {
+    public func update(mineField: MineField) -> MineField {
         switch self {
         case .visit(let visitedPoint):
             switch mineField {

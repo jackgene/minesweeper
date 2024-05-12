@@ -6,6 +6,7 @@
 //
 
 import Combine
+import MinesweeperFramework
 
 class CellState: ObservableObject {
     @Published var label: String? = nil
@@ -27,6 +28,8 @@ class AppState: ObservableObject {
                 case .changeLevel(level: let level):
                     level.size
                 case .startOver, .visit(_):
+                    nil
+                @unknown default:
                     nil
                 }
             }
@@ -66,6 +69,7 @@ class AppState: ObservableObject {
                 switch $0 {
                 case .uninitialized(_): false
                 case .sweeping(_, _), .tripped(_, _), .swept(_): true
+                @unknown default: true
                 }
             }
             .removeDuplicates()

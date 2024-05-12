@@ -7,9 +7,14 @@
 
 import Foundation
 
-struct Point: Equatable, Hashable, Codable {
+public struct Point: Equatable, Hashable, Codable {
     let left: UInt
     let top: UInt
+    
+    public init(left: UInt, top: UInt) {
+        self.left = left
+        self.top = top
+    }
     
     func adjacentPoints(withinWorldOfSize size: Size) -> [Point] {
         guard left < size.width, top < size.height else {

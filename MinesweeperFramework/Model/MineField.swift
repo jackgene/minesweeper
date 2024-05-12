@@ -7,13 +7,13 @@
 
 import Foundation
 
-enum MineField {
+public enum MineField {
     case uninitialized(level: Level)
     case sweeping(cells: [[Cell]], remaining: Set<Point>)
     case tripped(cells: [[Cell]], mine: Point)
     case swept(cells: [[Cell]])
     
-    var cellLabels: [[String?]] {
+    public var cellLabels: [[String?]] {
         switch self {
         case .uninitialized(level: let level):
             (0..<level.size.height).map { _ in
@@ -72,11 +72,11 @@ extension MineField: Codable {
     private static let jsonDecoder: JSONDecoder = JSONDecoder()
     private static let jsonEncoder: JSONEncoder = JSONEncoder()
 
-    static func from(json: Data) throws -> MineField {
+    public static func from(json: Data) throws -> MineField {
         try jsonDecoder.decode(MineField.self, from: json)
     }
     
-    var json: Data {
+    public var json: Data {
         get throws {
             try Self.jsonEncoder.encode(self)
         }

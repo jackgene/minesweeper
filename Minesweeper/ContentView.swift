@@ -5,6 +5,7 @@
 //  Created by Jack Leow on 2/18/24.
 //
 
+import MinesweeperFramework
 import SwiftUI
 
 struct CellView: View {

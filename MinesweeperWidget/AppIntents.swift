@@ -6,26 +6,29 @@
 //
 
 import AppIntents
+import MinesweeperFramework
 import SwiftUI
 
-let store: UserDefaults = UserDefaults(
+public let store: UserDefaults = UserDefaults(
     suiteName: Bundle.main
         .infoDictionary!["NSExtensionFileProviderDocumentGroup"] as? String
 )!
-let mineFieldJSONKey: String = "mineFieldJSON"
+public let mineFieldJSONKey: String = "mineFieldJSON"
 
-struct StartOverIntent: AppIntent {
-    static var title: LocalizedStringResource = "Start Over"
+public struct StartOverIntent: AppIntent {
+    public static var title: LocalizedStringResource = "Start Over"
     
-    func perform() async throws -> some IntentResult {
+    public init() {}
+    
+    public func perform() async throws -> some IntentResult {
         store.setValue(Data(), forKey: mineFieldJSONKey)
         
         return .result()
     }
 }
 
-struct VisitCellIntent: AppIntent {
-    static var title: LocalizedStringResource = "Visit Cell"
+public struct VisitCellIntent: AppIntent {
+    public static var title: LocalizedStringResource = "Visit Cell"
     
     @Parameter(title: "top")
     var top: Int
@@ -33,17 +36,17 @@ struct VisitCellIntent: AppIntent {
     @Parameter(title: "left")
     var left: Int
     
-    init(top: Int, left: Int) {
+    public init(top: Int, left: Int) {
         self.top = top
         self.left = left
     }
     
-    init() {
+    public init() {
         self.top = 4
         self.left = 4
     }
     
-    func perform() async throws -> some IntentResult {
+    public func perform() async throws -> some IntentResult {
         if let mineFieldJSON: Data = store.data(forKey: mineFieldJSONKey) {
             let lastMineField: MineField = (
                 try? .from(json: mineFieldJSON)
